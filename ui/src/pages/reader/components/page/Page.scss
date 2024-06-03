@@ -1,0 +1,25 @@
+
+.page-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+
+  .text-wrapper {
+    width: 100%;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+  .change-page-btn {
+    height: 100%;
+    transition: background .1s ease-in;
+
+    &:hover {
+      background: rgba(1,1,1,0.3);
+    }
+  }
+}

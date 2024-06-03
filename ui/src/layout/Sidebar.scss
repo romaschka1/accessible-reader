@@ -1,0 +1,28 @@
+.sidebar {
+  display: flex;
+
+  .navigation-wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 60px;
+    border-right: 1px solid black;
+  
+    .nav-item {
+      height: 60px;
+      width: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+  
+      &.active {
+        background: black;
+  
+        svg {
+          color: white;
+        }
+      }
+    }
+  }
+}
