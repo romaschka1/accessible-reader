@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/dashboard/Dashboard";
-import './app.scss';
+import './assets/app.scss';
 import Reader from "./pages/reader/Reader";
 import Sidebar from "./layout/Sidebar";
 import { IBookContext } from "./types/book-context";
@@ -29,10 +29,12 @@ function App () {
       <main className='app-main'>
         <Sidebar></Sidebar>
         
-        <Routes>
-          <Route path="/" element={ <Dashboard/> } />
-          <Route path="/book/:id" element={ <Reader/> } />
-        </Routes>
+        <div className="content-wrapper">
+          <Routes>
+            <Route path="/" element={ <Dashboard/> } />
+            <Route path="/book/:id" element={ <Reader/> } />
+          </Routes>
+        </div>
       </main>
     </BooksContext.Provider>
   </SettingsContext.Provider>

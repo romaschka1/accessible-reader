@@ -3,6 +3,7 @@ import './Sidebar.scss';
 import { Home, List, Settings } from 'react-feather';
 import { useLocation, useNavigate } from 'react-router-dom';
 import BookList from './components/book-list/book-list';
+import SettingList from './components/setting-list/setting-list';
 
 function Sidebar () {
   const location = useLocation();
@@ -13,14 +14,15 @@ function Sidebar () {
 
   useEffect(() => {
     setCurrentPath(location.pathname);
-    toggleSidebar(location.pathname.includes('/book/'));
+    toggleSidebar(location.pathname.includes('/book/') ? 'book-list' : '');
   }, [location]);
 
-  const toggleSidebar = (value?: boolean) => {
-    if (value === undefined) {
-      setSidebarOpen(!sidebarOpen);
+  const toggleSidebar = (content: string) => {
+    if (content) {
+      setSidebarOpen(sidebarContent === content ? !sidebarOpen : true);
+      setSidebarContent(content);
     } else {
-      setSidebarOpen(value);
+      setSidebarOpen(false);
     }
   }
 
@@ -38,7 +40,7 @@ function Sidebar () {
       <li>
         <button
           className={`nav-item ${currentPath.includes('/book/') ? 'active' : ''}`}
-          onClick={() => {toggleSidebar(); setSidebarContent('book-list')}}
+          onClick={() => toggleSidebar('book-list')}
           custom-attribute="nav-child"
           nav-component="true"
           nav-id="navigation-list"
@@ -47,7 +49,7 @@ function Sidebar () {
       <li>
         <button
           className="nav-item"
-          onClick={() => {toggleSidebar(); setSidebarContent('settings')}}
+          onClick={() => toggleSidebar('settings')}
           custom-attribute="nav-child"
           nav-component="true"
           nav-id="navigation-list"
@@ -55,7 +57,10 @@ function Sidebar () {
       </li>
     </ul>
 
-    { sidebarOpen && <BookList></BookList> }
+    { sidebarOpen && <div className="sidebar-content">
+      { sidebarContent === 'book-list' && <BookList></BookList> }
+      { sidebarContent === 'settings' && <SettingList></SettingList> }
+    </div> }
   </div>
 }
 

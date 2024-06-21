@@ -1,17 +1,7 @@
 .content-wrapper {
   padding: 30px;
+  width: 100%;
 }
-.book-card {
-  border: 1px solid white;
-  height: 150px;
-  cursor: pointer;
-
-  .chakra-card__body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  &:hover {
-    border: 1px solid green;
-  }
+.book-btn {
+  min-height: 150px;
 }

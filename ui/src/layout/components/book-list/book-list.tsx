@@ -23,7 +23,7 @@ function BookList() {
         <li key={index} className="default">
           <button
             onClick={() => openBook(book._id)}
-            className={`book-item ${book._id === currentBookId ? 'active' : ''}`}
+            className={`list-item ${book._id === currentBookId ? 'active' : ''}`}
             custom-attribute="nav-child"
             nav-component="true"
             nav-id="book-list"

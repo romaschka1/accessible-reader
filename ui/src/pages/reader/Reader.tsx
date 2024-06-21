@@ -129,17 +129,17 @@ function Reader() {
         toggleNoteMode
       }}
     >{
-        isLoading ? <div className="loading-wrapper">Loading...</div> :
-        <div className="content">
-          <Header></Header>
+      isLoading ? <div className="loading-wrapper">Loading...</div> :
+      <>
+        <Header></Header>
 
-          <div className="reader-wrapper">
-            <Bookmarks></Bookmarks>
-            <Page></Page>
-            <Notes></Notes>
-          </div>
+        <div className="reader-wrapper">
+          <Bookmarks></Bookmarks>
+          <Page></Page>
+          <Notes></Notes>
         </div>
-      }
+      </>
+    }
     </ReaderContext.Provider>
   );
 }

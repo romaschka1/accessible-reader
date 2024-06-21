@@ -1,4 +1,4 @@
-import { Input } from "@chakra-ui/react";
+import { Button, Input } from "@chakra-ui/react";
 import './Header.scss';
 import { useContext } from "react";
 import { ReaderContext } from "../../Reader";
@@ -56,17 +56,16 @@ function Header() {
     </div>
 
     <div className="header-item">
-      { getBookmark() ?
-        <button onClick={() => changeBookmarks('REMOVE')} custom-attribute="nav-entry nav-item" nav-component="true">Remove bookmark</button> :
-        <button onClick={() => changeBookmarks('ADD')} custom-attribute="nav-entry nav-item" nav-component="true">Add bookmark</button>
-      }
-      {
-        noteMode ? <>
-          <input placeholder="Note text..." value={newNoteText}></input>
-          <button onClick={() => changeNotes('ADD')}>Save note</button>
-          <button onClick={() => toggleNoteMode()}>Exit from note mode</button>
-        </> : <button onClick={() => toggleNoteMode()} custom-attribute="nav-entry nav-item" nav-component="true">{'Add note'}</button>
-      }
+      <Button
+        onClick={() => changeBookmarks(getBookmark() ? 'REMOVE' : 'ADD')}
+        custom-attribute="nav-entry nav-item"
+        nav-component="true"
+      >{ getBookmark() ? 'Remove bookmark' : 'Add bookmark' }</Button>
+      <Button
+        onClick={() => toggleNoteMode()}
+        custom-attribute="nav-entry nav-item"
+        nav-component="true"
+      >Add note</Button>
     </div>
   </div>
 }
