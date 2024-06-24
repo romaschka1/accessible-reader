@@ -28,6 +28,7 @@ function Dashboard() {
         fontWeight='bold'
         rightIcon={<Plus />}
         variant='solid'
+        colorScheme='teal'
         custom-attribute="nav-entry nav-item"
         nav-component="true"
       >Add</Button>
@@ -40,7 +41,8 @@ function Dashboard() {
             height={'auto'}
             fontSize='xl'
             fontWeight='bold'
-            variant='solid'
+            variant='outline'
+            colorScheme='teal'
             custom-attribute="nav-entry nav-item"
             nav-component="true"
           >{ book.name }</Button>

@@ -6,7 +6,7 @@
     align-items: center;
     flex-direction: column;
     width: 60px;
-    border-right: 1px solid black;
+    border-right: 1px solid var(--chakra-colors-teal-500);
   
     .nav-item {
       height: 60px;
@@ -17,10 +17,10 @@
       cursor: pointer;
   
       &.active {
-        background: black;
+        background: var(--chakra-colors-teal-500);
   
         svg {
-          color: white;
+          color: var(--chakra-colors-white);
         }
       }
     }
@@ -28,15 +28,14 @@
   .sidebar-content {
     width: 200px;
     height: 100%;
-    border-right: 1px solid black;
+    border-right: 1px solid var(--chakra-colors-teal-500);
 
     .list-item {
       width: 100%;
-      height: 60px;
+      min-height: 60px;
       display: flex;
-      align-items: center;
       justify-content: left;
-      padding: 0 15px;
+      padding: 15px;
     }
   }
 }

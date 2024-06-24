@@ -1,8 +1,8 @@
 .book-list {
   .list-item {
     &:hover, &.active {
-      background: black;
-      color: white;
+      background: var(--chakra-colors-teal-500);
+      color: var(--chakra-colors-white);
     }
   }
 }

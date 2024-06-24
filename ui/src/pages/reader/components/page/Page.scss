@@ -16,10 +16,6 @@
   }
   .change-page-btn {
     height: 100%;
-    transition: background .1s ease-in;
-
-    &:hover {
-      background: rgba(1,1,1,0.3);
-    }
+    margin: 0 15px;
   }
 }

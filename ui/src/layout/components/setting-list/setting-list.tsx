@@ -1,25 +1,48 @@
-import { FormLabel, Switch, useColorMode } from '@chakra-ui/react';
+import { FormLabel, Radio, RadioGroup, Stack, Switch, useColorMode } from '@chakra-ui/react';
 import './setting-list.scss';
 
 function SettingList() {
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode, setColorMode } = useColorMode();
 
-  const toggleMode = () => {
-    toggleColorMode();
-    localStorage.setItem('theme', colorMode);
+  const setTheme = (theme: string) => {
+    setColorMode(theme);
+    localStorage.setItem('theme', theme);
   }
 
   return <ul className="setting-list">
     <li className="default">
-      <div className="list-item">
-        <FormLabel mb='0' htmlFor='isDarkMode'>Dark Mode</FormLabel>
-        <Switch
-          id='isDarkMode'
-          custom-attribute="nav-entry nav-item"
-          nav-component="true"
-          isChecked={colorMode === 'dark'}
-          onChange={() => toggleMode()}
-        />
+      <div
+        className="list-item"
+        custom-attribute="nav-entry nav-container"
+        nav-component="true"
+        nav-id="settings-theme-list"
+      >
+        <FormLabel mb='0' htmlFor='isDarkMode'>Theme</FormLabel>
+        <RadioGroup onChange={(e) => setTheme(e)} value={colorMode}>
+          <Stack direction='column'>
+            <Radio
+              colorScheme='teal'
+              value='light' 
+              custom-attribute="nav-child"
+              nav-component="true"
+              nav-id="settings-theme-list"
+            >Light</Radio>
+            <Radio
+              colorScheme='teal'
+              value='dark' 
+              custom-attribute="nav-child"
+              nav-component="true"
+              nav-id="settings-theme-list"
+            >Dark</Radio>
+            <Radio
+              colorScheme='teal'
+              value='high-contrast' 
+              custom-attribute="nav-child"
+              nav-component="true"
+              nav-id="settings-theme-list"
+            >High contrast</Radio>
+          </Stack>
+        </RadioGroup>
       </div>
     </li>
   </ul>

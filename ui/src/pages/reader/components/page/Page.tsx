@@ -2,6 +2,7 @@ import "./Page.scss";
 import { useContext } from "react";
 import { ReaderContext } from "../../Reader";
 import { ChevronRight, ChevronLeft } from 'react-feather';
+import { Button } from "@chakra-ui/react";
 
 function Page() {
   const { bookmarks, page, pageSize, fontSize, pageData, changePage } = useContext(ReaderContext); 
@@ -19,9 +20,14 @@ function Page() {
   }
 
   return <div className="page-wrapper">
-    <button className="change-page-btn" onClick={() => changePage(page-1)} custom-attribute="nav-entry nav-item" nav-component="true">
-      <ChevronLeft size={60}/>
-    </button>
+    <Button
+      className="change-page-btn"
+      onClick={() => changePage(page-1)}
+      variant='ghost'
+      colorScheme='teal'
+      custom-attribute="nav-entry nav-item"
+      nav-component="true"
+    ><ChevronLeft size={60}/></Button>
     <div className="text-wrapper">
       { getBookmark() && <div className="bookmark"></div> }
 
@@ -33,9 +39,14 @@ function Page() {
         {page}/{pageData.length}
       </div>
     </div>
-    <button className="change-page-btn" onClick={() => changePage(page+1)} custom-attribute="nav-entry nav-item" nav-component="true">
-      <ChevronRight size={60}/>
-    </button>
+    <Button
+      className="change-page-btn"
+      onClick={() => changePage(page+1)}
+      variant='ghost'
+      colorScheme='teal'
+      custom-attribute="nav-entry nav-item"
+      nav-component="true"
+    ><ChevronRight size={60}/></Button>
   </div>
 }
 
