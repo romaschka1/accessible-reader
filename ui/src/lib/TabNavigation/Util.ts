@@ -1,5 +1,5 @@
 import { NavComponent, Navigation } from "./Entity";
-import { FocusRes, NavType, Order } from "./Type";
+import { FocusRes, NavigationType, Order } from "./Type";
 
 // Check if focus is present, otherwise initialize it
 export function initFocus(nav: Navigation): FocusRes {
@@ -26,7 +26,7 @@ export function initFocus(nav: Navigation): FocusRes {
   nav.activeComponent = active;
 
   // Focus container child if active component is container
-  if (active.type === NavType.Container) {
+  if (active.type === NavigationType.Container) {
     moveChildFocus(nav, Order.Current);
   } else {
     active.ref.tabIndex = 1;
@@ -56,7 +56,7 @@ export function moveFocus(nav: Navigation, order: Order): void {
   nav.activeComponent = next as NavComponent;
 
   // If active component is `container` focus his child
-  if (nav.activeComponent.type === NavType.Container) {
+  if (nav.activeComponent.type === NavigationType.Container) {
     moveChildFocus(nav, Order.Current);
   } else {
     nav.activeComponent.ref.tabIndex = 1;
@@ -67,7 +67,7 @@ export function moveFocus(nav: Navigation, order: Order): void {
 // Move focus for `child` elements inside the `container`
 export function moveChildFocus(nav: Navigation, order: Order): void {
   const active = nav.activeComponent;
-  if (active?.type !== NavType.Container) {
+  if (active?.type !== NavigationType.Container) {
     return;
   }
 

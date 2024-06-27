@@ -1,4 +1,4 @@
-export const NavType: {
+export const NavigationType: {
   Container: "Container";
   Item: "Item";
   Child: "Child";
@@ -9,7 +9,7 @@ export const NavType: {
   Child: "Child",
   DomItem: "DomItem"
 };
-export type NavType = typeof NavType[keyof typeof NavType];
+export type NavigationType = typeof NavigationType[keyof typeof NavigationType];
 
 export const Order: {
   Previous: "Previous";

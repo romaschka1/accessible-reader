@@ -1,4 +1,4 @@
-import { NavType, Order } from "./Type";
+import { NavigationType, Order } from "./Type";
 
 export class Navigation {
   win: Window;
@@ -15,14 +15,14 @@ export class Navigation {
 }
 
 export class NavComponent {
-  type: NavType;
+  type: NavigationType;
   ref: HTMLElement;
   items: DoublyLinkedHashList;
   activeChild: HTMLElement | null;
   containerId: string;
 
   constructor(ref: HTMLElement) {
-    this.type = getNavType(ref?.getAttribute('custom-attribute') || '');
+    this.type = getNavigationType(ref?.getAttribute('custom-attribute') || '');
     this.ref = ref;
     // Logic for container and container children, probably need to create separate class
     this.items = new DoublyLinkedHashList();
@@ -31,16 +31,16 @@ export class NavComponent {
   }
 }
 
-function getNavType(attributes: string): NavType {
+function getNavigationType(attributes: string): NavigationType {
   if (attributes.includes('nav-container')) {
-    return NavType.Container;
+    return NavigationType.Container;
   } else if (attributes.includes('nav-child')) {
-    return NavType.Child;
+    return NavigationType.Child;
   } else if (attributes.includes('nav-item')) {
-    return NavType.Item;
+    return NavigationType.Item;
   }
 
-  return NavType.DomItem;
+  return NavigationType.DomItem;
 }
 
 export class ComponentsList {
@@ -63,10 +63,10 @@ export class ComponentsList {
     const item = new NavComponent(el);
     this.elements.set(el, item);
 
-    if (item.type === NavType.Container && !this.containerValues.has(item.containerId)) {
+    if (item.type === NavigationType.Container && !this.containerValues.has(item.containerId)) {
       this.containerValues.set(item.containerId, item);
     }
-    if (item.type === NavType.Child) {
+    if (item.type === NavigationType.Child) {
       const curContainer = this.containerValues.get(item.containerId);
       curContainer?.items.push(item.ref);
       return;
@@ -79,10 +79,10 @@ export class ComponentsList {
     const item = new NavComponent(el);
     this.elements.delete(el);
 
-    if (item.type === NavType.Container) {
+    if (item.type === NavigationType.Container) {
       this.containerValues.delete(item.containerId);
     }
-    if (item.type === NavType.Child) {
+    if (item.type === NavigationType.Child) {
       const curContainer = this.containerValues.get(item.containerId);
       curContainer?.items.delete(item.ref);
 

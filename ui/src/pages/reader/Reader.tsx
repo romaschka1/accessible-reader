@@ -29,10 +29,8 @@ function Reader() {
   const [isLoading, setIsLoading] = useState(true);
   const [pageData, setPageData] = useState<string[]>([]);
   const [bookmarks, setBookmarks] = useState<number[]>([]);
-  const [notes, setNotes] = useState<INote[]>([]);
   const [fontSize, setFontSize] = useState<number>(defaultFontSize);
   const [pageSize, setPageSize] = useState<number>(defaultPageSize);
-  const [noteMode, setNoteMode] = useState<boolean>(false);
 
   useEffect(() => {
     getBook(state.id).then(res => {
@@ -86,18 +84,9 @@ function Reader() {
     }
 
     setBookmarks(newBookmarks);
-    updateBookData(state.id, { bookmarks: newBookmarks, notes: notes });
+    updateBookData(state.id, { bookmarks: newBookmarks, notes: null });
   }
 
-  const changeNotes = (operation: 'ADD' | 'REMOVE') => {
-    let newNotes = notes.slice();
-  
-    if (operation === 'ADD') {
-
-    } else if (operation === 'REMOVE') {
-
-    }
-  }
   const changeFontSize = (value: number) => {
     setFontSize(value);
     localStorage.setItem('fontSize', value.toString());
@@ -107,10 +96,6 @@ function Reader() {
     setReaderData(rawData.text);
   }
 
-  const toggleNoteMode = () => {
-    setNoteMode(!noteMode);
-  }
-
   return (
     <ReaderContext.Provider
       value = {{ 
@@ -118,15 +103,11 @@ function Reader() {
         pageData,
         pageSize,
         bookmarks,
-        notes,
         fontSize,
-        noteMode,
 
         changePage,
         changeBookmarks,
-        changeNotes,
-        changeFontSize,
-        toggleNoteMode
+        changeFontSize
       }}
     >{
       isLoading ? <div className="loading-wrapper">Loading...</div> :

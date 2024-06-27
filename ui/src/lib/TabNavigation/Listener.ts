@@ -1,5 +1,5 @@
 import { Navigation } from "./Entity";
-import { FocusRes, Order } from "./Type";
+import { FocusRes, NavigationType, Order } from "./Type";
 import { initFocus, moveChildFocus, moveFocus } from "./Util";
 
 export class NavigationListener {
@@ -54,11 +54,29 @@ export class NavigationListener {
     // Override default navigation events
     switch(e.key) {
       case('Enter'): {
-        this.navigation.activeComponent?.ref.dispatchEvent(new MouseEvent('click', {
-          "view": window,
-          "bubbles": true,
-          "cancelable": false
-        }));
+        if (this.navigation.activeComponent) {
+          let ref = this.navigation.activeComponent.ref;
+        
+          if (this.navigation.activeComponent.type === NavigationType.Container && this.navigation.activeComponent.activeChild) {
+            ref = this.navigation.activeComponent.activeChild;
+          }
+
+          if (ref.tagName !== 'BUTTON') {
+            ref.dispatchEvent(new MouseEvent('click', {
+              "view": window,
+              "bubbles": true,
+              "cancelable": false,
+              buttons: 1
+            }));
+          }
+
+          const activeElement = this.win.document.activeElement;
+          if (activeElement !== ref && this.navigation.win.document.body.contains(ref)) {
+            // Set focus back if it was losed due to some external enter click logic
+            ref.focus();
+          }
+        }
+
         break;
       };
       case('Tab'): {
@@ -84,6 +102,8 @@ export class NavigationListener {
     this.win.removeEventListener('click', (e: MouseEvent) => this.listenToMouseClick(e));
   }
   private listenToMouseClick(e: MouseEvent): void {
+    e.preventDefault();
+
     // Check if current clicked element is `navigation` item
     if (this.navigation.components.getItem(Order.Current, e.target as HTMLElement)) {
       return;

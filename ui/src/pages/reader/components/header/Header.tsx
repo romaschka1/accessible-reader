@@ -9,15 +9,10 @@ function Header() {
     bookmarks,
     pageSize,
     fontSize,
-    noteMode,
     changePage,
     changeFontSize,
     changeBookmarks,
-    toggleNoteMode,
-    changeNotes
   } = useContext(ReaderContext);
-  // const [ newNoteText, setNewNoteText ] = useState<string>('');
-  let newNoteText = '';
 
   const getBookmark = (): boolean => {
     let haveBookmark = false;
@@ -67,13 +62,6 @@ function Header() {
         custom-attribute="nav-entry nav-item"
         nav-component="true"
       >{ getBookmark() ? 'Remove bookmark' : 'Add bookmark' }</Button>
-      <Button
-        onClick={() => toggleNoteMode()}
-        variant='outline'
-        colorScheme='teal'
-        custom-attribute="nav-entry nav-item"
-        nav-component="true"
-      >Add note</Button>
     </div>
   </div>
 }
